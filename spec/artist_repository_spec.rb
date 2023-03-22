@@ -24,6 +24,22 @@ RSpec.describe ArtistRepository do
         expect(artists.first.name).to eq('Neha') # => 'Neha' 
     end
 
+    ##### DATABASE CH5 - 'find' method being tested now
+             
+    it "returns Neha as single artist" do
+            repo = ArtistRepository.new
 
+            artist = repo.find(1)
+            expect(artist.name).to eq  ('Neha')
+            expect(artist.genre).to eq ('Indian Music')
+    end
+
+    it "returns King as another artist" do
+            repo = ArtistRepository.new
+
+            artist = repo.find(2)
+            expect(artist.name).to eq  ('King')
+            expect(artist.genre).to eq ('Indian Hip-Hop')
+    end
 
 end

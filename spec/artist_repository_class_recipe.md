@@ -47,10 +47,21 @@ class ArtistRepository
         # SELECT id, name, genre FROM artists;
     end
 
+    ######## Databases CH 5 - find method being appended #######
+    # select a single record
+    # Given the id in argument (a number)
+    def find(id)
+        # Exceutes the SQL query:
+        # SELECT id, name, genre FROM artists WHERE id = $1;
+
+        # Returns a single artist
+    end
+
 end
 
 # 6. Write Test Examples
 
+# eg 1
 Get all  the artists:
 
 repo = ArtistRepository.new
@@ -59,6 +70,25 @@ artists = repo.all # Should return all
 artists.length # => 2 as we are inserting 2 records in seeds_artists.sql
 artists.first.id # => 1
 artists.first.name # => 'Neha' 
+
+# eg 2
+Get a single artist
+
+repo = ArtistRepository.new
+
+artist = repo.find(1)
+artist.name # => 'Neha' ###### as per the INSERT statement in seeds_artists.sql
+artist.genre # => 'Indian Music'
+
+# eg 3
+Get another single artist
+
+repo = ArtistRepository.new
+
+artist = repo.find(2)
+artist.name # => 'King' ###### as per the INSERT statement in seeds_artists.sql
+artist.genre # => 'Indian Hip-Hop'
+
 
 # 7. Reload the SQL seeds before each test run
 
