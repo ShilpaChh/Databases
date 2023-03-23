@@ -95,8 +95,11 @@ CREATE TABLE concerts (
   venue_id int,
   constraint fk_venue foreign key(venue_id)
     references venues(id)
-    <!-- on delete cascade -->
+    on delete cascade
 );
+
+
+<!-- TablePlus -> copy the two create sql's to create tables -> o/p Query 2 OK: CREATE TABLE -->
 
 <!-- 5. Create the tables.
 psql -h 127.0.0.1 database_name < albums_table.sql -->
