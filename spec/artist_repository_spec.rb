@@ -42,4 +42,73 @@ RSpec.describe ArtistRepository do
             expect(artist.genre).to eq ('Indian Hip-Hop')
     end
 
+    ##### DATABASE CH7 - create/delete/update methods being tested now
+    it "creates a new artist" do
+        repo = ArtistRepository.new
+        new_artist = Artist.new
+        new_artist.name = 'Beatles'
+        new_artist.genre = 'Pop'
+
+        repo.create(new_artist)
+
+        artists = repo.all
+        last_artist = artists.last
+
+        expect(last_artist.name).to eq ('Beatles')
+        expect(last_artist.genre).to eq ('Pop')
+    end
+
+    it "deletes artist with id 1" do
+        repo = ArtistRepository.new
+
+        id_to_delete = 1
+        
+        repo.delete(id_to_delete)
+        
+        all_artists = repo.all
+        expect(all_artists.length).to eq(1)
+        expect(all_artists.first.id).to eq('2')    
+    end
+
+    it "deletes two artists" do
+        repo = ArtistRepository.new
+        
+        repo.delete(1)
+        repo.delete(2)
+        
+        all_artists = repo.all
+        expect(all_artists.length).to eq(0) # both artists from seeds have been deleted, so this shd return zero
+    end
+
+    it "updates the first artist with new values" do
+        repo = ArtistRepository.new
+
+        artist = repo.find(1) #  find artist 1
+        
+        artist.name = 'Something else' # update the name to anything u want
+        artist.genre = 'Disco' # update the genre u like it to
+        
+        repo.update(artist) # this would update the artist 1
+        
+        updated_artist = repo.find(1) # as this method doesn't return anything, we use fresh find to look for the updated artist
+        
+        expect(updated_artist.name).to eq ('Something else')
+        expect(updated_artist.genre).to eq ('Disco')
+    end
+
+    it "updates the first artist with new artist's name and not genre" do
+        repo = ArtistRepository.new
+
+        artist = repo.find(1) #  find artist 1
+        
+        artist.name = 'Jubin' # update the name to anything u want
+        
+        repo.update(artist) # this would update the artist 1
+        
+        updated_artist = repo.find(1) # as this method doesn't return anything, we use fresh find to look for the updated artist
+        
+        expect(updated_artist.name).to eq ('Jubin') # changing from Neha to Jubin
+        expect(updated_artist.genre).to eq ('Indian Music')
+    end
+
 end
