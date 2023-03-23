@@ -1,4 +1,4 @@
-Two Tables Design Recipe Template
+Two Tables Design Recipe Template FOR CONCERTS AND VENUES tables:
 
 ########
 # databases/challenges/06_designing_schema_two_tables.md
