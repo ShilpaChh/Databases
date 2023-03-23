@@ -166,7 +166,7 @@ all_artists = repo.all
 all_artists.length # => 1 # when we start we start with 2 artists as per seeds_artists_sql, so shd return 1
 all_artists.first.id # => '2' # as we deleted id 1, so, only id 2 shd be remaining
 
-# eg 6 for - DATABASES: CH 7 - Test-driving write operations - update method
+# eg 6 for - DATABASES: CH 7 - Test-driving write operations - update method - name and genre
 <!- Create a new artist -->
 repo = ArtistRepository.new
 
@@ -181,6 +181,21 @@ updated_artist = repo.find(1) # as this method doesn't return anything, we use f
 
 updated_artist.name  # => 'Something else'
 updated_artist.genre # => 'Disco'
+
+# eg 7 for - DATABASES: CH 7 - Test-driving write operations - update method for just name
+<!- Create a new artist -->
+  repo = ArtistRepository.new
+
+  artist = repo.find(1) #  find artist 1
+  
+  artist.name = 'Jubin' # update the name to anything u want
+  
+  repo.update(artist) # this would update the artist 1
+  
+  updated_artist = repo.find(1) # as this method doesn't return anything, we use fresh find to look for the updated artist
+  
+  expect(updated_artist.name).to eq ('Jubin')
+  expect(updated_artist.genre).to eq ('Indian Music')
 
 # 7. Reload the SQL seeds before each test run
 
